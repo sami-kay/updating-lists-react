@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
 import './App.css';
 import Validation from './ValidationComponent';
-import Char from './CharComponents';
+import Chars from './CharComponents';
+
 
 class App extends Component {
 
-state = {
-  userInput: '',
-  textArray: []
-}
+  state = {
+    userInput: ''
+  }
 
-textLength = (event) => {
-  this.setState({userInput: event.target.value})
-}
+  textString = (event) => {
+    this.setState({userInput: event.target.value})
+  }
 
-deleteCharHandler = (index) => {
-  const text = this.state.userInput.split('');
-  text.splice(index, 1);
-  const updatedText = text.join('');
-  this.setState({userInput: updatedText});
-}
+  deleteCharHandler = (index) => {
+    const char = this.state.userInput.split('');
+    char.splice(index, 1);
+    const newString = char.join('');
+    this.setState({userInput: newString})
+  }
 
   render() {
 
-const charComponents = this.state.userInput.split('').map((el, index) => {
-  return <Char
-  chars={el}
-  key={index}
-  clicked={() => this.deleteCharHandler(index)}/>;
-});
+    const characters = this.state.userInput.split('').map((el, index) => {
+      return <Chars
+      character={el}
+      key={index}
+      clicked={() => this.deleteCharHandler(index)}
+      />
+    })
 
     return (
       <div className="App">
@@ -42,12 +43,12 @@ const charComponents = this.state.userInput.split('').map((el, index) => {
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
 
-<div>
-<input type="text" onChange={this.textLength} value={this.state.userInput}/>
-<p>You have typed {this.state.userInput.length} characters.</p>
-<Validation inputLength={this.state.userInput.length}/>
-{charComponents}
-</div>
+        <div>
+          <input type="text" onChange={this.textString} value={this.state.userInput}/>
+          <p>{this.state.userInput.length}</p>
+          <Validation textLength={this.state.userInput.length} />
+          {characters}
+        </div>
 
 
       </div>

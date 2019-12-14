@@ -1,13 +1,12 @@
 import React from 'react';
 import './Chars.css';
 
-const char = (props) => {
-
-return(
-<div className='style' onClick={props.clicked}>
-{props.chars}
+const chars = (props) => {
+  return (
+    <div className='style' onClick={props.clicked}>
+<p>{props.character}</p>
 </div>
 )
 }
 
-export default char;
+export default chars;
